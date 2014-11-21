@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:DataServices>
+        <Schema Namespace="RAMOdata.Models"
+            xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityType Name="Property">
+                <Key>
+                    <PropertyRef Name="MLSNumber" />
+                </Key>
+                <Property Name="Status" Type="RAMOdata.Models.Status" Nullable="false" />
+                <Property Name="StatusCategory" Type="RAMOdata.Models.StatusCategory" Nullable="false" />
+                <Property Name="PropertyType" Type="RAMOdata.Models.PropertyType" Nullable="false" />
+                <Property Name="ListPrice" Type="Edm.Int32" Nullable="false" />
+                <Property Name="MLSNumber" Type="Edm.Double" Nullable="false" />
+                <Property Name="TMK" Type="Edm.String" />
+                <Property Name="Address" Type="Edm.String" />
+                <Property Name="District" Type="RAMOdata.Models.District" Nullable="false" />
+                <Property Name="DOM" Type="Edm.Int32" Nullable="false" />
+                <Property Name="ListDate" Type="Edm.String" />
+                <Property Name="LandAcres" Type="Edm.String" />
+                <Property Name="LandSqFt" Type="Edm.Int32" Nullable="false" />
+                <Property Name="View" Type="Edm.String" />
+                <Property Name="REO" Type="Edm.Boolean" Nullable="false" />
+                <Property Name="PotentialShortSale" Type="Edm.Boolean" Nullable="false" />
+                <Property Name="Waterfront" Type="RAMOdata.Models.Waterfront" Nullable="false" />
+                <Property Name="LandTenure" Type="RAMOdata.Models.LandTenure" Nullable="false" />
+                <Property Name="MaintenanceFee" Type="Edm.Decimal" Nullable="false" />
+                <Property Name="Longitude" Type="Edm.String" />
+                <Property Name="Latitude" Type="Edm.String" />
+                <Property Name="ListingAgentFirstName" Type="Edm.String" />
+                <Property Name="ListingAgentLastName" Type="Edm.String" />
+                <Property Name="ListingAgent1Email" Type="Edm.String" />
+                <Property Name="ListingAgent1Phone" Type="Edm.String" />
+                <Property Name="ListingAgent1PhoneArea" Type="Edm.String" />
+                <Property Name="ListingAgent1Phone2" Type="Edm.String" />
+                <Property Name="ListingAgent1Phone2Area" Type="Edm.String" />
+                <Property Name="ListingAgent1Url" Type="Edm.String" />
+                <Property Name="ListingAgent2FirstName" Type="Edm.String" />
+                <Property Name="ListingAgent2LastName" Type="Edm.String" />
+                <Property Name="ListingAgent2Email" Type="Edm.String" />
+                <Property Name="ListingAgent2Phone" Type="Edm.String" />
+                <Property Name="ListingAgent2PhoneArea" Type="Edm.String" />
+                <Property Name="ListingAgent2Phone2" Type="Edm.String" />
+                <Property Name="ListingAgent2Phone2Area" Type="Edm.String" />
+                <Property Name="ListingAgent2Url" Type="Edm.String" />
+                <Property Name="ListingOffice1Email" Type="Edm.String" />
+                <Property Name="ListingOffice1Name" Type="Edm.String" />
+                <Property Name="ListingOffice1Phone" Type="Edm.String" />
+                <Property Name="ListingOffice1PhoneArea" Type="Edm.String" />
+                <Property Name="ListingOffice1Url" Type="Edm.String" />
+                <Property Name="ListingOffice2Email" Type="Edm.String" />
+                <Property Name="ListingOffice2Name" Type="Edm.String" />
+                <Property Name="ListingOffice2Phone" Type="Edm.String" />
+                <Property Name="ListingOffice2PhoneArea" Type="Edm.String" />
+                <Property Name="ListingOffice2Url" Type="Edm.String" />
+            </EntityType>
+            <EntityType Name="LivableProperty" BaseType="RAMOdata.Models.Property">
+                <Property Name="Baths" Type="Edm.Decimal" Nullable="false" />
+                <Property Name="Beds" Type="Edm.Int32" Nullable="false" />
+                <Property Name="Pool" Type="Edm.Boolean" Nullable="false" />
+                <Property Name="LivingAreaSqFt" Type="Edm.Int32" Nullable="false" />
+                <Property Name="PVInstalled" Type="Edm.Boolean" Nullable="false" />
+            </EntityType>
+            <EntityType Name="Residential" BaseType="RAMOdata.Models.LivableProperty">
+                <Property Name="CarportNumCars" Type="Edm.Int32" Nullable="false" />
+                <Property Name="GarageNumCars" Type="Edm.Int32" Nullable="false" />
+                <Property Name="MaintFee" Type="Edm.Decimal" Nullable="false" />
+                <Property Name="OhanaBeds" Type="Edm.Int32" Nullable="false" />
+                <Property Name="OhanaBaths" Type="Edm.Decimal" Nullable="false" />
+                <Property Name="OhanaCarportNumCars" Type="Edm.Int32" Nullable="false" />
+                <Property Name="OhanaGarageNumCars" Type="Edm.Int32" Nullable="false" />
+                <Property Name="OhanaSqFt" Type="Edm.Int32" Nullable="false" />
+            </EntityType>
+            <EntityType Name="Land" BaseType="RAMOdata.Models.Property" />
+            <EntityType Name="Office">
+                <Key>
+                    <PropertyRef Name="BrokerId" />
+                </Key>
+                <Property Name="BrokerId" Type="Edm.String" Nullable="false" />
+                <Property Name="MainOfficeId" Type="Edm.String" />
+                <Property Name="MainOfficeEmail" Type="Edm.String" />
+                <Property Name="MainOfficePhone" Type="Edm.String" />
+                <Property Name="MainOfficePhoneArea" Type="Edm.String" />
+                <Property Name="MainOfficeUrl" Type="Edm.String" />
+                <Property Name="MainOfficeName" Type="Edm.String" />
+                <Property Name="OfficeEmail" Type="Edm.String" />
+                <Property Name="OfficePhone1" Type="Edm.String" />
+                <Property Name="OfficePhone2" Type="Edm.String" />
+                <Property Name="OfficePhone1Area" Type="Edm.String" />
+                <Property Name="OfficePhone2Area" Type="Edm.String" />
+                <Property Name="OfficeUrl" Type="Edm.String" />
+                <Property Name="OfficeName" Type="Edm.String" />
+            </EntityType>
+            <EntityType Name="Agent">
+                <Key>
+                    <PropertyRef Name="AgentId" />
+                </Key>
+                <Property Name="AgentId" Type="Edm.String" Nullable="false" />
+                <Property Name="Email" Type="Edm.String" />
+                <Property Name="FullName" Type="Edm.String" />
+                <Property Name="Phone1" Type="Edm.String" />
+                <Property Name="Phone2" Type="Edm.String" />
+                <Property Name="Phone1Area" Type="Edm.String" />
+                <Property Name="Phone2Area" Type="Edm.String" />
+                <Property Name="Url" Type="Edm.String" />
+                <Property Name="AgentOfficeId" Type="Edm.String" />
+                <Property Name="Phone1Desc" Type="Edm.String" />
+                <Property Name="Phone2Desc" Type="Edm.String" />
+            </EntityType>
+            <EntityType Name="Condo" BaseType="RAMOdata.Models.LivableProperty">
+                <Property Name="Unit" Type="Edm.String" />
+                <Property Name="BuildingName" Type="Edm.String" />
+            </EntityType>
+            <EntityType Name="MultiDwelling" BaseType="RAMOdata.Models.LivableProperty" />
+            <EntityType Name="Fractional" BaseType="RAMOdata.Models.LivableProperty" />
+            <EntityType Name="Business" BaseType="RAMOdata.Models.Property" />
+            <EntityType Name="Commercial" BaseType="RAMOdata.Models.Property" />
+            <EntityType Name="OpenHouse">
+                <Key>
+                    <PropertyRef Name="OpenHouseId" />
+                </Key>
+                <Property Name="OpenHouseId" Type="Edm.String" Nullable="false" />
+            </EntityType>
+            <EnumType Name="Status">
+                <Member Name="ACTIVE" Value="0" />
+                <Member Name="CNTNGNTWRELEASE" Value="1" />
+                <Member Name="CNTNGNTESCROWCANCELING" Value="2" />
+                <Member Name="SOLD" Value="3" />
+                <Member Name="PENDINGDONOTSHOW" Value="4" />
+                <Member Name="PENDINGCONTTOSHOW" Value="5" />
+                <Member Name="EXPIRED" Value="6" />
+                <Member Name="WITHDRAWN" Value="7" />
+                <Member Name="TEMPOFFMARKET" Value="8" />
+                <Member Name="CANCELED" Value="9" />
+            </EnumType>
+            <EnumType Name="StatusCategory">
+                <Member Name="Active" Value="0" />
+                <Member Name="Sold" Value="1" />
+                <Member Name="Pending" Value="2" />
+                <Member Name="Expired" Value="3" />
+                <Member Name="Withdrawn" Value="4" />
+            </EnumType>
+            <EnumType Name="PropertyType">
+                <Member Name="Business" Value="0" />
+                <Member Name="CommercialForSale" Value="1" />
+                <Member Name="CommercialLeaseUnit" Value="2" />
+                <Member Name="CommercialLeaseLand" Value="3" />
+                <Member Name="Condo" Value="4" />
+                <Member Name="CoOp" Value="5" />
+                <Member Name="PUD" Value="6" />
+                <Member Name="TimeInterval" Value="7" />
+                <Member Name="Fractional" Value="8" />
+                <Member Name="PartialInterest" Value="9" />
+                <Member Name="MultiDwelling" Value="10" />
+                <Member Name="SingleFamily" Value="11" />
+                <Member Name="SingleFamilywAttOhana" Value="12" />
+                <Member Name="SFwDetOhanaorCottage" Value="13" />
+                <Member Name="VacantLand" Value="14" />
+            </EnumType>
+            <EnumType Name="District">
+                <Member Name="Haiku" Value="0" />
+                <Member Name="Hana" Value="1" />
+                <Member Name="Honokohau" Value="2" />
+                <Member Name="Kaanapali" Value="3" />
+                <Member Name="Kahakuloa" Value="4" />
+                <Member Name="Kahului" Value="5" />
+                <Member Name="Kapalua" Value="6" />
+                <Member Name="Kaupo" Value="7" />
+                <Member Name="Keanae" Value="8" />
+                <Member Name="Kihei" Value="9" />
+                <Member Name="Kipahulu" Value="10" />
+                <Member Name="KulaUlupalakuaKanaio" Value="11" />
+                <Member Name="Lahaina" Value="12" />
+                <Member Name="Lanai" Value="13" />
+                <Member Name="Maalaea" Value="14" />
+                <Member Name="MakawaoOlindaHaliimaile" Value="15" />
+                <Member Name="MauiMeadows" Value="16" />
+                <Member Name="Molokai" Value="17" />
+                <Member Name="Nahiku" Value="18" />
+                <Member Name="NapiliKahanaHonokowai" Value="19" />
+                <Member Name="Olowalu" Value="20" />
+                <Member Name="Pukalani" Value="21" />
+                <Member Name="SpreckelsvillePaiaKuau" Value="22" />
+                <Member Name="WaileaMakena" Value="23" />
+                <Member Name="Wailuku" Value="24" />
+            </EnumType>
+            <EnumType Name="Waterfront">
+                <Member Name="BeachFront" Value="0" />
+                <Member Name="OceanFront" Value="1" />
+                <Member Name="None" Value="2" />
+                <Member Name="AcrossStreetfromOcean" Value="3" />
+            </EnumType>
+            <EnumType Name="LandTenure">
+                <Member Name="FeeSimple" Value="0" />
+                <Member Name="Leasehold" Value="1" />
+                <Member Name="LeaseholdFA" Value="2" />
+            </EnumType>
+        </Schema>
+        <Schema Namespace="Default"
+            xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="Container">
+                <EntitySet Name="Residentials" EntityType="RAMOdata.Models.Residential" />
+                <EntitySet Name="Properties" EntityType="RAMOdata.Models.Property" />
+                <EntitySet Name="Lands" EntityType="RAMOdata.Models.Land" />
+                <EntitySet Name="Offices" EntityType="RAMOdata.Models.Office" />
+                <EntitySet Name="Agents" EntityType="RAMOdata.Models.Agent" />
+                <EntitySet Name="Condos" EntityType="RAMOdata.Models.Condo" />
+                <EntitySet Name="MultiDwellings" EntityType="RAMOdata.Models.MultiDwelling" />
+                <EntitySet Name="Fractional" EntityType="RAMOdata.Models.Fractional" />
+                <EntitySet Name="Businesses" EntityType="RAMOdata.Models.Business" />
+                <EntitySet Name="Commercials" EntityType="RAMOdata.Models.Commercial" />
+                <EntitySet Name="LivableProperties" EntityType="RAMOdata.Models.LivableProperty" />
+                <EntitySet Name="OpenHouses" EntityType="RAMOdata.Models.OpenHouse" />
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
