@@ -1,0 +1,10 @@
+fix:
+ address
+ mls
+ agent
+ prices are doubles without dots
+check all types match:
+	Condo vs Condominimum
+	Spaces in PropertyType
+	
+get status from odata type 

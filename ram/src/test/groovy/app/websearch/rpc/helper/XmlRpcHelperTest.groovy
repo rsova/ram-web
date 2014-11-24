@@ -3,10 +3,11 @@ package app.websearch.rpc.helper;
 //import org.custommonkey.xmlunit.*
 import org.custommonkey.xmlunit.XMLTestCase
 import org.custommonkey.xmlunit.XMLUnit
-import org.junit.Test
+
+import redstone.xmlrpc.XmlRpcParser
+import redstone.xmlrpc.XmlRpcStruct
 
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 
 
 class XmlRpcHelperTest extends XMLTestCase{
@@ -44,20 +45,30 @@ class XmlRpcHelperTest extends XMLTestCase{
 	}
 
 	public void test_SearchResponseToCollection() {
-		String expectedXml = getClass().getClassLoader().getResourceAsStream('search/from_url_1.xml').getText()
+		String xml = getClass().getClassLoader().getResourceAsStream('search/from_url_1.xml').getText()
 		//def path = 'methodResponse.params.param.value.array.data.value[5]'
 		//def path = [methodResponse:[params:[param:[value:[arra:[data: 'value[5]']]]]]]
-		def actual = XmlRpcHelper.xmlRpcToCollection1(expectedXml,null)
+		List actual = XmlRpcHelper.xmlRpcToCollection(xml)
+		println actual
 		def mappings = [:]
 		def order = 0
-		for (pair in actual) {
-			//if(order>=25)break;
-			if(order>=86)break;
-			mappings.put(pair.key, ++order)
+//		for (pair in actual) {
+//			//if(order>=25)break;
+//			if(order>=86)break;
+//			mappings.put(pair.key, ++order)
+//		}
+		
+		for(item in actual){
+			if(item instanceof List){
+				for (pair in item.first()) {
+					if(order>=86)break;
+					mappings.put(pair.key, ++order)
+				}				
+			}
 		}
 		println mappings
-		def json = new GsonBuilder().setPrettyPrinting().create().toJson('mappings':mappings)
-	    new File('mappings.json')<<json
+		//def json = new GsonBuilder().setPrettyPrinting().create().toJson('mappings':mappings)
+	    //new File('mappings.json')<<json
 	}
 
 	void test_OdataToXmlRpcResponse() {
@@ -92,4 +103,68 @@ class XmlRpcHelperTest extends XMLTestCase{
 		println XmlRpcHelper.toXmlResponse(list)
 		
 	}
+	
+	
+	void testParser() {
+		def str = '''<methodCall>
+   <methodName>search</methodName>
+   <params>
+      <param>
+         <value>
+            <struct>
+               <member>
+                  <name>dbid</name>
+                  <value>
+                     <string>dbid1139259934</string>
+                  </value>
+               </member>
+               <member>
+                  <name>WhatPropType</name>
+                  <value>
+                     <array>
+                        <data>
+                           <value>
+                              <string>Residential</string>
+                           </value>
+                        </data>
+                     </array>
+                  </value>
+               </member>
+               <member>
+                  <name>WhatNumber</name>
+                  <value>
+                     <string>1</string>
+                  </value>
+               </member>
+            </struct>
+         </value>
+      </param>
+   </params>
+</methodCall>
+'''
+		final def val = null
+		XmlRpcParser parser = new XmlRpcParser(){
+			XmlRpcStruct map
+			@Override
+			protected void handleParsedValue( arg0) {
+				map = arg0
+				println "inside"
+			};
+//			public XmlRpcValue getCurrentValue(){
+//				return super.currentValue
+//			}
+		}
+		
+		InputStream is = new ByteArrayInputStream(str.getBytes());
+		parser.parse(is)
+		//def value = parser.getCurrentValue()
+		println parser.map.'WhatPropType'
+	}
+	
+	void testListToResponse(){
+		List list = ['one', 'two']
+		println XmlRpcHelper.toXmlResponse(list)
+		
+	}
+	
 }

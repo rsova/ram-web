@@ -1,16 +1,14 @@
 package app.websearch;
 
-import javax.sound.midi.ControllerEventListener;
-
 import org.custommonkey.xmlunit.*
 import org.junit.*
 
-import app.controller.WebsearchController;
-import app.service.odata.RamoService;
+import app.controller.WebsearchController
+import app.service.odata.RamOdataService
 import app.websearch.rpc.helper.XmlRpcHelper
-import app.websearch.transformer.TransformationService;
-import app.websearch.url.helper.UrlHelper;
-import app.websearch.xml.helper.IgnoreNamedElementsDifferenceListener
+import app.websearch.transformer.TransformationService
+import app.websearch.url.helper.UrlHelper
+import framework.BaseTest
 
 //WhatPage	 		1	Page of data to return
 //WhatNumber		The maximum number of MLS numbers that can be passed is 200.	200	Number of listings to return, Max number is 200
@@ -63,34 +61,17 @@ import app.websearch.xml.helper.IgnoreNamedElementsDifferenceListener
 //WhatPool	 		None	Boolean field for properties with Pool
 //MeFirst	 		N	If set to Y, the Agent or Office listing will be returned first.
 
-class WebsearchSearchTest extends XMLTestCase {
-	final static def WS='http://websearch.ramidx.com/smartframe/ramxml.php'
+class WebsearchSearchTest extends BaseTest {
+//	final static def WS='http://websearch.ramidx.com/smartframe/ramxml.php'
 	final static def METHOD ='search'
-	static final String SRC_TEST_RESOURCES = 'src/test/resources/'
-	static final String TIME_TO_RUN_DOUBLE = '/methodResponse[1]/params[1]/param[1]/value[1]/array[1]/data[1]/value[4]/double[1]/text()[1]'
-	static final String DBID = 'dbid1139259934'//dbid1142571627
+//	static final String SRC_TEST_RESOURCES = 'src/test/resources/'
+//	static final String TIME_TO_RUN_DOUBLE = '/methodResponse[1]/params[1]/param[1]/value[1]/array[1]/data[1]/value[4]/double[1]/text()[1]'
+//	static final String DBID = 'dbid1139259934'//dbid1142571627
 	//un-comment this to skip xml compare
-	//final boolean SKIP_CMP
+	final boolean SKIP_CMP
 
 	def curl = []
 		
-//	@Before
-	void setUp(){
-		curl = ['curl',
-			'-H', 'Cookie: WebSearchID=r2so30lip7g5rp8ibonnej9ha2, D_SID=74.123.217.146:3rK08PPRKVcCOWmibSyxVs9T5+e0ovpplUhtdFEsY+4; D_PID=3119DF0B-3C06-308A-88B4-6118E4B86D16; D_IID=0B90D182-B361-3247-BBB8-F4E25374A8DD; D_UID=2DF8F0F0-54E8-3AC8-9B9F-566FA9407FDA; D_HID=D/r38/ISyXBwlPemp21MktzpUBkVEfdJwsLQeFu/JaM',
-			'-H','Content-Type:text/xml',
-			'-H', 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:33.0) Gecko/20100101 Firefox/33.0',
-			//'data',
-		   WS]
-		super.setUp()
-	}
-	
-	//@After
-	void tearDown() {
-		curl = null;
-		super.tearDown();
-	}
-	
 	void test_lat1_lon1_sortdirection1_number() {
 		
 		curl.add("-d " + XmlRpcHelper.toXmlRpcRequest(METHOD,['dbid':DBID,'WhatLat1':'20.0','WhatLon1':'-156.0','WhatSortType1':'ListPrice','WhatSortDirection1':'ASC','WhatNumber':'5']))
@@ -329,11 +310,10 @@ class WebsearchSearchTest extends XMLTestCase {
 		def webIdxXml = curl.execute().text
 		println webIdxXml
 		println '~~~~~~~~~~~~~~~~~~'
-		RamoService oService = new RamoService()
-		oService.top = 1
+		service.top = 1
 		TransformationService transformer = new TransformationService()
 		WebsearchController controller = new WebsearchController()
-		controller.oService = oService
+		controller.oService = service
 		controller.transformer = transformer
 		def odata =  controller.executeSearch(map)
 		println odata
@@ -341,45 +321,37 @@ class WebsearchSearchTest extends XMLTestCase {
 
 		def odataXml = XmlRpcHelper.toXmlResponse([odata.cnt1, odata.top, odata.cnt2,odata.total,odata.data])
 		println odataXml
-//		def xmlRpcMethodParams = XmlRpcHelper.xmlRpcToCollection(request)
-//		xmlRpcMethodParams.remove(DBID)
-//		def odataParams = transformer.fromXmlrpcToOdata(serviceParams)
-//		def start = Date.getMillisOf(new Date())
-//		def json = oService.execute(odataParams)
-//		double total = (Date.getMillisOf(new Date()) - start)/1000 //seconds
-//		wsResponseData = transformer.findAllFromParams(json).plus(['total':total])
-
-
-		//println actual
 	}
 	
-	private compareXml(String actual, String control = null) {
-		//create control file with the name similar to the test
-		def test = getName().replaceFirst('test_','')
-		//check if xml compare is enabled
-		if(this.hasProperty( 'SKIP_CMP' )){println '~~~~> Skipped XML check for similarity';return}
-		println '------> Checking XML for similarity'
+	void testCondoOne() {
+		//def url = '''http://www.ramaui.com/Results.php?MLS=&WhatPropType%5B%5D=Residential&WhatStartPrice=&WhatEndPrice=&WhatStartBed=&WhatEndBed=&WhatStartBath=&WhatEndBath=&WhatStartIntArea=&WhatEndIntArea=&WhatStartExtArea=&WhatEndExtArea=&WhatSortType1=ListPrice&WhatSortDirection1=ASC&WhatSortType2=&WhatSortDirection2=ASC&Task=Search&WhatNumber=1'''
+		def url = '''http://www.ramaui.com/Results.php?MLS=329222&WhatStartPrice=&WhatEndPrice=&WhatDistrict%5B%5D=Haiku&WhatStartBed=&WhatEndBed=&WhatStartBath=&WhatEndBath=&WhatStartIntArea=&WhatEndIntArea=&WhatStartExtArea=&WhatEndExtArea=&WhatSortType1=ListPrice&WhatSortDirection1=ASC&WhatSortType2=&WhatSortDirection2=ASC&Task=Search'''
+//		<methodCall><methodName>search</methodName><params><param><value><struct><member><name>WhatPropType</name><value><array><data><value><string>Residential</string></value></data></array></value></member><member><name>WhatNumber</name><value><string>1</string></value></member><member><name>dbid</name><value><string>dbid1139259934</string></value></member></struct></value></param></params></methodCall>
+//		[WhatPropType:[Residential], WhatNumber:1, dbid:dbid1139259934]
+		def map =[WhatMLS:['329222'],  WhatSortType1:'ListPrice', WhatSortDirection1:'ASC', WhatSortDirection2:'ASC']
 		
-		saveToFileIfNotExist(SRC_TEST_RESOURCES + "$METHOD/$test"+".xml", actual)
-		String expectedXml = new File(SRC_TEST_RESOURCES + "$METHOD/$test"+".xml").getText()
-		DifferenceListener listener = new IgnoreNamedElementsDifferenceListener(TIME_TO_RUN_DOUBLE);
-		Diff diff = new Diff(expectedXml, actual);
-		diff.overrideDifferenceListener(listener);
-		assert diff.similar()
-		assert diff.identical()
-	}
+//		//def map = UrlHelper.urlToMap(url)
+//		def map = [WhatPropType:['Condo'], WhatAddress:'500 Bay DR']
+		map.put('dbid',DBID)
+		println map
+		def request = XmlRpcHelper.toXmlRpcRequest(METHOD,map)
+		println request
+		curl.add("-d " + request)
+		def webIdxXml = curl.execute().text
+		println webIdxXml
+		println '~~~~~~~~~~~~~~~~~~'
+		http://ramodata.azurewebsites.net/odata/Condos?$top=1&$filter=Address eq '500 Bay DR'
+		map = [WhatPropType:['Condo'], WhatAddress:['500 Bay DR']]
+		service.top = 1
+		TransformationService transformer = new TransformationService()
+		WebsearchController controller = new WebsearchController()
+		controller.oService = service
+		controller.transformer = transformer
+		def odata =  controller.executeSearch(map)
+		println odata
 
-	private void saveToFileIfNotExist(String fileName, String response) {
-		if(! new File(fileName).exists()){
-			saveToFile(fileName, response)
-			fail("Control File Created, re-run the test")
-		}
-	}
-
-	private saveToFile(String fileName, String response) {
-		def w = new File(fileName).newWriter()
-		w<<response
-		w.close()
+		def odataXml = XmlRpcHelper.toXmlResponse(odata)
+		println odataXml
 	}
 	
 }

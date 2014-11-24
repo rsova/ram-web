@@ -1,15 +1,15 @@
 package framework;
 
+import org.apache.olingo.client.core.v4.ODataClientImpl
 import org.custommonkey.xmlunit.Diff
 import org.custommonkey.xmlunit.DifferenceListener
 import org.custommonkey.xmlunit.XMLTestCase
 import org.custommonkey.xmlunit.XMLUnit
 
-import app.websearch.xml.helper.IgnoreNamedElementsDifferenceListener
 import app.service.mongo.MongoService
-
-import com.mongodb.DB
-import com.mongodb.MongoClient
+import app.service.odata.RamOdataService
+import app.service.odata.resolver.MetadataResolver
+import app.websearch.xml.helper.IgnoreNamedElementsDifferenceListener
 
 class BaseTest  extends XMLTestCase {
 	final static def WS='http://websearch.ramidx.com/smartframe/ramxml.php'
@@ -37,13 +37,18 @@ class BaseTest  extends XMLTestCase {
 			WS
 		]
 		
-		 service = getKoaService()
+		 //service = getKoaService()
+		 service = new RamOdataService()
+		 service.resolver = new MetadataResolver()
+		 service.v4Client = new ODataClientImpl()
+ 
 		
 	}
 
 	//@After
 	void tearDown() {
-		websearch_raidx = null;
+		websearch_raidx = null
+		servicre = null
 	}
 
 	protected compareXml(String actual, String control) {
@@ -76,13 +81,13 @@ class BaseTest  extends XMLTestCase {
 	}
 
 	protected MongoService getKoaService() {
-		ConfigObject config = new ConfigSlurper().parse(new File("./src/ratpack/Config.groovy").getText()).app
-		MongoClient client = new MongoClient(config.mongo.host as String, config.mongo.port)
-		DB db = client.getDB(config.mongo.db)
-		db.authenticate(config.mongo.user, config.mongo.pass as char[])
-		MongoService service = new MongoService()
-		service.db = db
-		service.collection = 'websearch'
-		return service
+//		ConfigObject config = new ConfigSlurper().parse(new File("./src/ratpack/Config.groovy").getText()).app
+//		MongoClient client = new MongoClient(config.mongo.host as String, config.mongo.port)
+//		DB db = client.getDB(config.mongo.db)
+//		db.authenticate(config.mongo.user, config.mongo.pass as char[])
+//		MongoService service = new MongoService()
+//		service.db = db
+//		service.collection = 'websearch'
+		return null
 	}
 }

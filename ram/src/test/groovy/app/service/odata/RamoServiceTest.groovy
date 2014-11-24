@@ -17,11 +17,15 @@ import org.apache.olingo.commons.api.edm.constants.ODataServiceVersion
 import org.junit.After
 import org.junit.Before
 
+import app.service.odata.resolver.MetadataResolver
+
 class RamoServiceTest extends GroovyTestCase {
-	RamoService oservice
+	RamOdataService oservice
 	@Before
 	public void setUp(){
-		oservice = new RamoService()
+		oservice = new RamOdataService()
+		oservice.resolver = new MetadataResolver()
+		oservice.v4Client = new ODataClientImpl()
 	}
 	
 	@After

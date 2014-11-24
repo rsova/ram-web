@@ -6,16 +6,16 @@
 				<array>
 					<data>
 						<value>
-							<int>655</int>
+							<int>1</int>
 						</value>
 						<value>
 							<int>1</int>
 						</value>
 						<value>
-							<double>654.0</double>
+							<double>1</double>
 						</value>
 						<value>
-							<double>2.767</double>
+							<double>0.884</double>
 						</value>
 						<value>
 							<array>
@@ -25,13 +25,13 @@
 											<member>
 												<name>MLS</name>
 												<value>
-													<string>349727.0</string>
+													<string>329222.0</string>
 												</value>
 											</member>
 											<member>
 												<name>Type</name>
 												<value>
-													<string>SingleFamily</string>
+													<string>Condo</string>
 												</value>
 											</member>
 											<member>
@@ -43,13 +43,13 @@
 											<member>
 												<name>ListPrice</name>
 												<value>
-													<string>7200000.0</string>
+													<string>1425000.0</string>
 												</value>
 											</member>
 											<member>
 												<name>AddressStreet</name>
 												<value>
-													<string>1212 SUMMER RD</string>
+													<string>500 Bay DR</string>
 												</value>
 											</member>
 											<member>
@@ -61,7 +61,7 @@
 											<member>
 												<name>WaterFront</name>
 												<value>
-													<string>None</string>
+													<string>OceanFront</string>
 												</value>
 											</member>
 											<member>
@@ -79,13 +79,13 @@
 											<member>
 												<name>key</name>
 												<value>
-													<string>(808) 6690070</string>
+													<string>(808) 6690423</string>
 												</value>
 											</member>
 											<member>
 												<name>ListingOffice1_Name</name>
 												<value>
-													<string>Sakamoto Properties Limited</string>
+													<string>Sullivan Properties Inc</string>
 												</value>
 											</member>
 											<member>
@@ -97,25 +97,25 @@
 											<member>
 												<name>ListingOffice2_Name</name>
 												<value>
-													<string>Sakamoto Properties Limited</string>
+													<string></string>
 												</value>
 											</member>
 											<member>
 												<name>ListDate</name>
 												<value>
-													<string>2011-10-11</string>
+													<string>2008-01-19</string>
 												</value>
 											</member>
 											<member>
 												<name>HouseCarport</name>
 												<value>
-													<string>0.0</string>
+													<string>null</string>
 												</value>
 											</member>
 											<member>
 												<name>HouseGarage</name>
 												<value>
-													<string>0.0</string>
+													<string>null</string>
 												</value>
 											</member>
 											<member>
@@ -127,19 +127,19 @@
 											<member>
 												<name>Beds</name>
 												<value>
-													<string>8.0</string>
+													<string>1.0</string>
 												</value>
 											</member>
 											<member>
 												<name>Baths</name>
 												<value>
-													<string>8.5</string>
+													<string>1.0</string>
 												</value>
 											</member>
 											<member>
 												<name>LivSQFT</name>
 												<value>
-													<string>8178.0</string>
+													<string>1006.0</string>
 												</value>
 											</member>
 											<member>
@@ -151,31 +151,31 @@
 											<member>
 												<name>LandAcres</name>
 												<value>
-													<string>0.7949</string>
+													<string>16.4</string>
 												</value>
 											</member>
 											<member>
 												<name>MaintFee</name>
 												<value>
-													<string>800.0</string>
+													<string>0.0</string>
 												</value>
 											</member>
 											<member>
 												<name>Ohana_Beds</name>
 												<value>
-													<string>0.0</string>
+													<string>null</string>
 												</value>
 											</member>
 											<member>
 												<name>Ohana_Baths</name>
 												<value>
-													<string>0.0</string>
+													<string>null</string>
 												</value>
 											</member>
 											<member>
 												<name>Ohana_LivSQFT</name>
 												<value>
-													<string>0.0</string>
+													<string>null</string>
 												</value>
 											</member>
 											<member>
@@ -193,25 +193,31 @@
 											<member>
 												<name>AgentEmail</name>
 												<value>
-													<string>Roy@SakamotoProperties.com</string>
+													<string>Pat@SullivanProperties.com</string>
 												</value>
 											</member>
 											<member>
 												<name>AgentWebPage</name>
 												<value>
-													<string>www.SakamotoProperties.com</string>
+													<string>www.SullivanProperties.com</string>
+												</value>
+											</member>
+											<member>
+												<name>ListingOffice1_Email</name>
+												<value>
+													<string>info@SullivanProperties.com</string>
 												</value>
 											</member>
 											<member>
 												<name>Lat</name>
 												<value>
-													<string>20.9926700592041</string>
+													<string>21.0029144287109</string>
 												</value>
 											</member>
 											<member>
 												<name>Lon</name>
 												<value>
-													<string>-156.659301757812</string>
+													<string>-156.662658691406</string>
 												</value>
 											</member>
 											<member>

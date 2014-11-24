@@ -18,48 +18,27 @@ package app
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
+import org.springframework.cache.CacheManager
+import org.springframework.cache.annotation.EnableCaching
+import org.springframework.cache.concurrent.ConcurrentMapCache
+import org.springframework.cache.support.SimpleCacheManager
 import org.springframework.context.ApplicationContext
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 
 @Configuration
 @EnableAutoConfiguration
+//@EnableCaching
 @ComponentScan
-//@RestController
 class Ram {
-//
-//	@RequestMapping("/")
-//	def websearch() {
-//		[message: "Hello World"]
-//	}
 	
-//	@Autowired
-//	RamoService oService
-
-//	@RequestMapping(value="/websearch/{name}", method = RequestMethod.POST)// consumes="application/json")
-//	def handleWebsearch(@RequestBody String xml, @PathVariable String name) {
-//		RamoService oService = new RamoService()
-//		def wsResponseData = [:]
-//		Map serviceParams = generateServiceParameterMap(xml)
-//		if(name.equals('lists')){
-//			//			service.collection = COLLECTION_LIST
-//			//			wsResponseData = service.findOne(serviceParams)
-//			//			method = serviceParams.get(METHOD_NAME_KEY).capitalize()
-//		}else{
-//			wsResponseData = oService.findAllFromParams(serviceParams)
-//			//method = 'search'
-//		}
-//
-//		[message: wsResponseData]
-//	}
-//
-//
-//	private Map generateServiceParameterMap(String xmlRpc) {
-//		def xmlRpcMethodParams = XmlRpcHelper.xmlRpcToCollection(xmlRpc)
-//		//xmlRpcMethodParams.remove(DBID)
-//		
-//		return xmlRpcMethodParams
-//	}
+	@Bean
+	public CacheManager cacheManager() {
+		SimpleCacheManager cacheManager = new SimpleCacheManager();
+		cacheManager.setCaches(Arrays.asList(new ConcurrentMapCache("lists")));
+		return cacheManager;
+	}
 
 	static void main(String[] args) throws Exception {
 		ApplicationContext ctx = SpringApplication.run(Ram.class, args)
@@ -68,7 +47,6 @@ class Ram {
 		for (String beanName : beanNames) {
 			System.out.println(beanName);
 		}
-
 	}
 
 }

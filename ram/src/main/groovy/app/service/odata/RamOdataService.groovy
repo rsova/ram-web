@@ -3,29 +3,42 @@ package app.service.odata
 import org.apache.olingo.client.api.uri.URIFilter
 import org.apache.olingo.client.api.uri.v4.FilterFactory
 import org.apache.olingo.client.api.uri.v4.URIBuilder
-import org.apache.olingo.client.core.ConfigurationImpl
-import org.apache.olingo.client.core.uri.v4.FilterFactoryImpl
-import org.apache.olingo.client.core.uri.v4.URIBuilderImpl
 import org.apache.olingo.client.core.v4.ODataClientImpl
-import org.apache.olingo.commons.api.edm.constants.ODataServiceVersion
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.cache.CacheManager
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 
 import app.service.odata.resolver.MetadataResolver
 
 @Service
-public class RamoService {
+public class RamOdataService {
 	int top
 	final static String PROPERTY_TYPE = 'PropertyType'
 	static final String SERVICE_ROOT = 'http://ramodata.azurewebsites.net/odata/'
+	static final String GET_LIST = 'getlist'
 	
-	MetadataResolver resolver
-	//final FilterFactory fFactory
-	ODataClientImpl v4Client
+	@Autowired CacheManager cacheManager
+	@Autowired MetadataResolver resolver
+	@Autowired ODataClientImpl v4Client
 
-	public RamoService(){
-		resolver = new MetadataResolver()
-		v4Client = new ODataClientImpl()
+	public RamOdataService(){
+//		resolver = new MetadataResolver()
+//		v4Client = new ODataClientImpl()
 		top = 10
+	}
+	
+//	@Cacheable("lists")
+	public Map getLists(Map params){
+		String type = params.get(GET_LIST)		
+		def data = cacheManager?.getCache('lists')?.get(type)?.get()
+		if(!data){
+			String xml = new URL(SERVICE_ROOT + '$metadata').getText()
+			data = resolver.getEnumType(type)
+			data = ['type':type.capitalize(), 'data':data]
+			cacheManager.getCache('lists').put(type, data)
+		}
+		return data
 	}
 
 	public String execute(Map params){
@@ -37,7 +50,6 @@ public class RamoService {
 
 	}
 	public URIBuilder generateBuilder(String entity, URIFilter filter){
-		//URIBuilder builder = new URIBuilderImpl(ODataServiceVersion.V40, new ConfigurationImpl() , SERVICE_ROOT)
 		URIBuilder builder =  v4Client.newURIBuilder(SERVICE_ROOT).appendEntitySetSegment(entity).top(top)
 		if(filter){
 			builder.filter(filter)

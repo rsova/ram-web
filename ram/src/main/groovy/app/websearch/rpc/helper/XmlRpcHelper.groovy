@@ -34,11 +34,17 @@ class XmlRpcHelper {
 		return xml.replace('i4>', 'int>')
 	}
 
-	static public Map xmlRpcToCollection(String xmlRpc){
+	static public Object xmlRpcToCollection(String xmlRpc){
+		XmlRpcParserImp parser = new XmlRpcParserImp()
+		parser.parse(new ByteArrayInputStream(xmlRpc.getBytes()))
+		return parser.collection
+	}
+	
+	static public Map xmlRpcToCollection2(String xmlRpc){
 		
 		XmlRpcSerializer serializer = new XmlRpcSerializer()
 		def response = new XmlSlurper().parseText(xmlRpc)
-		def list = response.params.param.value.struct.member.depthFirst().findAll { it.name() in ['name', 'value']}
+		def list = response.params.param.value.struct.member.depthFirst().findAll { it.name() in ['name', 'value']} unique { a, b -> a <=> b }
 		def collection = list.collate(2)
 		def data = [:]
 		for (element in collection) {

@@ -74,5 +74,8 @@ class MetadataResolver {
 		}
 		return entry
 	}
+	public List getEnumType(String type){
+		return models.EnumType.find{ it.@Name?.text()?.equalsIgnoreCase(type)}.Member.collect{it.@Name?.text() }
+	}
 
 }

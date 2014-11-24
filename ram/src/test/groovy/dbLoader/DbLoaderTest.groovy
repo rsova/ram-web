@@ -7,7 +7,6 @@ import app.websearch.rpc.helper.XmlRpcHelper
 import com.mongodb.WriteResult
 
 import framework.BaseTest
-import groovyx.gpars.GParsPool
 
 class DbLoaderTest  extends BaseTest {
 

@@ -32,7 +32,8 @@ class TransformationService {
 			}
 			propertyList.putAll(property)
 		}
-		return ['data':[propertyList,'&lt;div style=&quot;font-size:10px&quot;&gt;This' ]]
+		return propertyList
+		//return ['data':[propertyList,'&lt;div style=&quot;font-size:10px&quot;&gt;This' ]]
 	}
 //	public Map findAllFromParams(String json){
 //		//start from value, parse json to list of
