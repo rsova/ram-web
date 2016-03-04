@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><methodResponse>
+  <params>
+    <param>
+      <value>
+        <array>
+          <data>
+            <value>
+              <int>0</int>
+            </value>
+            <value>
+              <int>1</int>
+            </value>
+            <value>
+              <double>1.0</double>
+            </value>
+            <value>
+              <double>0.262</double>
+            </value>
+            <value>
+              <array>
+                <data>
+                  <value/>
+                  <value/>
+                  <value/>
+                  <value/>
+                  <value/>
+                  <value/>
+                  <value/>
+                </data>
+              </array>
+            </value>
+            <value>
+              <string>&lt;div style="font-size:10px"&gt;This information is believed to be accurate.&lt;br /&gt;It has been provided by sources other than the Realtors Assoc. of Maui&lt;br /&gt;and should not be relied upon without independent verification.&lt;/div&gt;
+	   &lt;div style="font-size:10px"&gt;You should conduct your own investigation and consult&lt;br /&gt;with appropriate professionals to determine the accuracy of the information provided&lt;br /&gt;and to answer any questions concerning the property and structures located thereon.&lt;/div&gt;
+	   &lt;div style="font-size:10px"&gt;Featured properties may or may not be listed by the office/agent presenting this brochure.&lt;/div&gt;
+	   &lt;div style="font-size:10px;padding-top:10px;"&gt;Copyright, 1995-2014, REALTORS&lt;sup&gt;&amp;reg;&lt;/sup&gt; Association of Maui, Inc. All Rights Reserved.&lt;/div&gt;</string>
+            </value>
+          </data>
+        </array>
+      </value>
+    </param>
+  </params>
+</methodResponse>

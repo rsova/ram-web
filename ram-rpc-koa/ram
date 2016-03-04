@@ -1,0 +1,110 @@
+--  select * from dbo.Agent where usercode = '11970';
+-- select * from dbo.Agent where usercode = 'MarinaRETS';
+-- select * from dbo.Agent where usercode is null;
+-- select * from dbo.Agent where fullname = 'Richard E. Lopez RB-13603';
+-- select * from dbo.Agent where fullname = 'Jeannie Wenger RB-21016';
+-- select * from dbo.Agent where fullname = 'Denise Ware';-- 2
+-- select * from dbo.Agent where fullname = 'Cynthia Warner RB-15934';
+-- select TOP 10 * from dbo.Agent order by lastname asc;
+-- select count(distinct fullname ) as count from dbo.Agent;
+-- select count(fullname) as c, fullname from dbo.Agent group by fullname order by c desc;
+-- select count(*) from dbo.Agent where fullname != '';
+-- select * from dbo.Agent where fullname = '';
+-- select * from dbo.Agent where datalength(fullname)=0;
+-- select count(distinct fullname) as count from dbo.Agent where agenttype != 0;
+-- select count(fullname) as count from dbo.Agent where agenttype > 0;
+-- select count(agenttype) as c, agenttype from dbo.Agent group by agenttype order by c desc;
+
+--  offices
+-- select * from dbo.Office where MainOfficeName = '808 Encore Realty';
+-- select * from dbo.Office where MainOfficeAbbreviation = '9606';
+-- select distinct MainOfficeAbbreviation, MainOfficeName from dbo.Office order by MainOfficeName asc;
+-- select * from dbo.Office where MainOfficeAbbreviation != Abbreviation;
+-- select Top 100 * from dbo.Office;
+
+select MLSNumber as MLS,
+Class,
+PropertyType as Type,
+District,
+ListPrice,
+AddressNumber,
+AddressDirection,
+AddressStreet,
+AddressLotUnit,
+City,
+State,
+Zip,
+Status,
+WaterFront,
+View,
+AgentID,
+AgentName,
+AgentPhone,
+ListingOffice1_ID,
+ListingOffice1_Name,
+ListingOffice1_Phone,
+CoListingAgent_ID,
+CoListingAgent_Name,
+CoListingAgent_Phone,
+ListingOffice2_ID,
+ListingOffice2_Name,
+ListingOffice2_Phone,
+ListDate,
+VirtualTour,
+Div,
+Zone,
+Sec,
+Plat,
+Par,
+Unit,
+CPR,
+HouseCarport,
+HouseGarage,
+OhanaCarport,
+OhanaGarage,
+LT,
+PartialOwnership,
+PercentOwnership,
+BuildingName,
+FloorLevel,
+Beds,
+Baths,
+LivSQFT,
+LandSQFT,
+LandAcres,
+MaintFee,
+PublicRemarks,
+Ohana_Beds,
+Ohana_Baths,
+Ohana_LivSQFT,
+FixedBeginDate,
+FixedEndDate,
+Res_Condo,
+VOWAddress,
+VOWComment,
+VOWAVM,
+VOWInclude,
+PotentialShortSale,
+REO,
+AgentEmail,
+AgentFax,
+AgentWebPage,
+AgentFullName,
+ListingOffice1_Email,
+ListingOffice1_Fax,
+ListingOffice1_WebPage,
+CoListingAgent_Email,
+CoListingAgent_Fax,
+CoListingAgent_WebPage,
+CoListingAgent_FullName,
+ListingOffice2_Email,
+ListingOffice2_Fax,
+ListingOffice2_WebPage,
+GeoLatitude as Lat,
+GeoLongitude as Lon,
+PoolYN,
+PV_Installed,
+PVO_Installed,
+PV_Ownership,
+PVO_Ownership
+where MLSNumber = 354384

@@ -1,0 +1,10 @@
+---
+applications:
+- name: ram-rpc
+  memory: 512M
+  instances: 1
+  #domain: cfapps.io
+  domain: de.a9sapp.eu
+  path: build/libs/ram-rpc-1.0.0.jar
+  buildpack: https://github.com/cloudfoundry/java-buildpack.git
+  # gradlew 

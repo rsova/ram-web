@@ -1,0 +1,112 @@
+-- diffs
+	open house on ram site displays yesterdays open houses. Problem or BR?
+	counts are different
+	doubles in new xml forced to have fraction 1 vs 1.0
+	empty tags <></> vs </>
+	latitude longitude different precision 
+	Expected text value 'Fraction Partial Interval' but was 'Fraction-Partial-Interval'
+	Building name missing MLS 363922
+	-- (updated record to match) Enum_WaterFront	Id Name: 3 Across Streetfrom Ocean - got to have <Across Street from Ocean> 
+	Need to get statuses for idx short/search
+			 Id Name                   LegacyName
+			 -- ---------------------- ------------------------
+			  0 ACTIVE                 ACTIVE
+			  1 CNTNGNTWRELEASE        CNTNGNTWRELEASE
+			 -- 2 CNTNGNTESCROWCANCELING CNTNGNT ESCROW CANCELING
+			  3 SOLD                   SOLD
+			  4 PENDINGDONOTSHOW       PENDINGDONOTSHOW
+			--  5 PENDINGCONTTOSHOW      PENDING - CONT. TO SHOW
+			  6 EXPIRED                EXPIRED
+			  7 WITHDRAWN              WITHDRAWN
+			  8 TEMPOFFMARKET          TEMPOFFMARKET
+			  9 CANCELED               CANCELED
+
+ 	Office has diff new '488' but idx was '1927' 
+
+punch list
+-----------
+85%	solds - 
+	-- implement, 100 pages
+	
+25% search - 
+	reuse short to do query
+	
+80% openhouse
+	start testing
+	
+85%	shorts
+	missing props
+		WhaterFront //WhatWaterAll  Array: OceanFront,BeachFront, Across Street from Ocean
+		PropertyType //WhatOhanaAll  Array: Single Family, Single Family w/AttOhana, SF w/DetOhana or Cottage
+		LT //WhatLandTenureAllArray: Fee Simple, Leasehold ,Leasehold-FA
+		ListingAgreement //ExAgencyYes?Include exclusive agency listings in the query.
+		Div //WhatDivAny?Array: ?
+		Zone //WhatZoneAnyAny?Array: ?
+		Sec //WhatSecAny?Array: ?
+		Plat//WhatPlatAny?Array: ?
+		Par//WhatParAny?Array: ?
+		if agent or office bring listings for them first //MeFirstNIf set to Y, the Agent or Office listing will be returned first.
+	filler for <value>
+	images add images
+	long lat verify, do double comp upto 3-5 spaces
+	handle dashes - use local lookups?
+	
+85% lists - redo with sql
+
+
+-------
+refactoring:
+get rid of odata get sqlserver service instead
+getlist takes 4 different parameters to process queries
+init pool on startup 
+lists:
+	districts: hard-coded list
+	condos: hard-coded list
+	-agent -'1797' vs '1867'from db, empty usercodes, fullnames coming in,  like select * from dbo.Agent where fullname = 'Denise Ware' 
+	offices: fetching all, need to write filter
+	
+property:
+	search :
+		todo: params to sql
+		problems: * Ids instead of values. Joints on Sql, districts and condo ids are not in db, postprocessing? 
+				  * View is code where is the value
+				  * Nulls brake xmlrpcparcer, handle in code vs in sql
+				  * Images
+		//WhatWater	 		All  	Array: OceanFront,BeachFront, Across Street from Ocean
+		//WhatOhana	 		All  	Array: Single Family, Single Family w/Att Ohana, SF w/Det Ohana or Cottage
+		//WhatLandTenure	All		Array: Fee Simple, Leasehold ,Leasehold-FA
+		//ExAgency	 		Yes?		Include exclusive agency listings in the query.
+		//WhatDiv	 		Any?		Array: ?
+		//WhatZoneAny	 	Any?		Array: ?
+		//WhatSec	 		Any?		Array: ?
+		//WhatPlat	 		Any?		Array: ?
+		//WhatPar	 		Any?		Array: ?	
+		//MeFirst	 		N	If set to Y, the Agent or Office listing will be returned first.
+
+	
+openhouse:
+	todo: params to sql
+			--endtime not date
+			--time formated without seconds
+			--zip has - on the end
+		  	--format date
+		    handle no recs <value></value> vs <value><string>
+		  
+	problems: -- L_Status is number -- use case to convert
+	
+
+		
+tests - re -factor them with new ram sqlService		
+
+
+
+fix:
+ address
+ mls
+ agent
+ prices are doubles without dots
+check all types match:
+	Condo vs Condominimum
+	Spaces in PropertyType
+	
+get status from odata type 
