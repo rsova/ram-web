@@ -75,18 +75,25 @@ class OpenHouseRepository {
 		TimeZone.setDefault(TimeZone.getTimeZone('GMT-10'))// Hawaiian  time
 	}
 	
-	private String makeFilterClause (Map params){
+	protected String makeFilterClause (Map params){
 		String filterClause = ' ';		
 		String conjunct = 'AND';
 		
 		if (params.'WhatAgent') {
 			List<String> ids = [];
+			
 			for (String userCode : params.'WhatAgent'.collect{"$it"}) {
 				Agent agent = agentRepo.findAgentByUserCode(userCode);
 				if (agent) {
 					ids.add("'${agent.identifier}'");
 				}
 			}
+			
+			if(ids==null || ids.size() == 0){
+				//if there is a miss on id, use one that does not exist.
+				ids.add('-1')
+			}
+			
 			String set = ids.join(',');
 			filterClause +=  " $conjunct Agent in (${set})";
 		}
@@ -109,6 +116,12 @@ class OpenHouseRepository {
 					ids.add("'${office.identifier}'");
 				}
 			}
+			
+			if(ids==null || ids.size() == 0){
+				//if there is a miss on id, use one that does not exist.
+				ids.add('-1')
+			}
+
 			String set = ids.join(',');
 			filterClause +=  " $conjunct ListingOffice1 in (${set})";
 		}
